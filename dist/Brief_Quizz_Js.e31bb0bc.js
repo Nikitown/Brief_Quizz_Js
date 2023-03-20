@@ -118,330 +118,344 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"index.js":[function(require,module,exports) {
-//this would be the object shape for storing the questions  
-//you can change the questions to your own taste or even add more questions..
+// Constants of the main containers
+var startWrapper = document.getElementById("start-wrapper");
+var quizWrapper = document.getElementById("quiz-wrapper");
+var leaderboardWrapper = document.getElementById("leaderboard-wrapper");
+
+// Constants of the start container
+var username = document.getElementById("username");
+var startBtn = document.getElementById("start-btn");
+
+// Constants of the quiz container
+var question = document.getElementById("question");
+var answersWrapper = document.getElementById("answers-wrapper");
+var nextBtn = document.getElementById("next-btn");
+var progressBar = document.getElementById("progress-bar");
+var retryBtn = document.getElementById("retry-btn");
+var currentQuestion = 0;
+var score = 0;
+var progress = 0;
+
+// Questions and answers
 var questions = [{
-  question: "How many days makes a week ?",
-  optionA: "10 days",
-  optionB: "14 days",
-  optionC: "5 days",
-  optionD: "7 days",
-  correctOption: "optionD"
+  question: "Choose the correct HTML element for the largest heading:",
+  answer1: "&lt;h1&gt;",
+  answer2: "&lt;h6&gt;",
+  answer3: "&lt;heading&gt;",
+  correctAnswer: "a-1"
 }, {
-  question: "How many players are allowed on a soccer pitch ?",
-  optionA: "10 players",
-  optionB: "11 players",
-  optionC: "9 players",
-  optionD: "12 players",
-  correctOption: "optionB"
+  question: "What is the correct HTML element for inserting a line break?",
+  answer1: "&lt;break&gt;",
+  answer2: "&lt;br&gt;",
+  answer3: "&lt;lb&gt;",
+  correctAnswer: "a-2"
 }, {
-  question: "Who was the first President of USA ?",
-  optionA: "Donald Trump",
-  optionB: "Barack Obama",
-  optionC: "Abraham Lincoln",
-  optionD: "George Washington",
-  correctOption: "optionD"
+  question: "Choose the correct HTML element to define important text:",
+  answer1: "&lt;b&gt;",
+  answer2: "&lt;strong&gt;",
+  answer3: "&lt;important&gt;",
+  correctAnswer: "a-2"
 }, {
-  question: "30 days has ______ ?",
-  optionA: "January",
-  optionB: "December",
-  optionC: "June",
-  optionD: "August",
-  correctOption: "optionC"
+  question: "How can you open a link in a new tab/browser window?",
+  answer1: "&lt;a href='url' target='new'&gt;",
+  answer2: "&lt;a href='url' new&gt;",
+  answer3: "&lt;a href='url' target='_blank'&gt;",
+  correctAnswer: "a-3"
 }, {
-  question: "How manay hours can be found in a day ?",
-  optionA: "30 hours",
-  optionB: "38 hours",
-  optionC: "48 hours",
-  optionD: "24 hours",
-  correctOption: "optionD"
+  question: "Which of these elements are all &lt;table&gt; elements?",
+  answer1: "&lt;table&gt; &lt;tr&gt; &lt;td&gt;",
+  answer2: "&lt;thead&gt; &lt;body&gt; &lt;tr&gt;",
+  answer3: "&lt;table&gt; &lt;tr&gt; &lt;tt&gt;",
+  correctAnswer: "a-1"
 }, {
-  question: "Which is the longest river in the world ?",
-  optionA: "River Nile",
-  optionB: "Long River",
-  optionC: "River Niger",
-  optionD: "Lake Chad",
-  correctOption: "optionA"
+  question: "Inline elements are normally displayed without starting a new line.",
+  answer1: "False",
+  answer2: "True",
+  answer3: "It depends...",
+  correctAnswer: "a-2"
 }, {
-  question: "_____ is the hottest Continent on Earth ?",
-  optionA: "Oceania",
-  optionB: "Antarctica",
-  optionC: "Africa",
-  optionD: "North America",
-  correctOption: "optionC"
+  question: "How do you add a background color for all &lt;h1&gt; elements?",
+  answer1: "h1 {background-color: #FFFFFF;}",
+  answer2: "h1.all {background-color: #FFFFFF;}",
+  answer3: "all.h1 {background-color: #FFFFFF;}",
+  correctAnswer: "a-1"
 }, {
-  question: "Which country is the largest in the world ?",
-  optionA: "Russia",
-  optionB: "Canada",
-  optionC: "Africa",
-  optionD: "Egypt",
-  correctOption: "optionA"
+  question: "Which CSS property controls the text size?",
+  answer1: "font-size",
+  answer2: "text-size",
+  answer3: "text-style",
+  correctAnswer: "a-1"
 }, {
-  question: "Which of these numbers is an odd number ?",
-  optionA: "Ten",
-  optionB: "Twelve",
-  optionC: "Eight",
-  optionD: "Eleven",
-  correctOption: "optionD"
+  question: "How do you display hyperlinks without an underline?",
+  answer1: "a {text-decoration: no-underline;}",
+  answer2: "a {underline: none;}",
+  answer3: "a {text-decoration: none;}",
+  correctAnswer: "a-3"
 }, {
-  question: "\"You Can't see me\" is a popular saying by",
-  optionA: "Eminem",
-  optionB: "Bill Gates",
-  optionC: "Chris Brown",
-  optionD: "John Cena",
-  correctOption: "optionD"
+  question: "How do you make each word in a text start with a capital letter?",
+  answer1: "text-style: capitalize",
+  answer2: "text-transform: capitalize",
+  answer3: "You can't do that with CSS",
+  correctAnswer: "a-2"
 }, {
-  question: "Where is the world tallest building located ?",
-  optionA: "Africa",
-  optionB: "California",
-  optionC: "Dubai",
-  optionD: "Italy",
-  correctOption: "optionC"
+  question: "When using the padding property; are you allowed to use negative values?",
+  answer1: "Yes",
+  answer2: "No",
+  answer3: "It depends...",
+  correctAnswer: "a-2"
 }, {
-  question: "The longest river in the United Kingdom is ?",
-  optionA: "River Severn",
-  optionB: "River Mersey",
-  optionC: "River Trent",
-  optionD: "River Tweed",
-  correctOption: "optionA"
+  question: "How do you make a list that lists its items with squares?",
+  answer1: "list-style-type: square;",
+  answer2: "list: square;",
+  answer3: "list-type: square;",
+  correctAnswer: "a-1"
 }, {
-  question: "How many permanent teeth does a dog have ?",
-  optionA: "38",
-  optionB: "42",
-  optionC: "40",
-  optionD: "36",
-  correctOption: "optionB"
+  question: "How do you write an IF statement?",
+  answer1: "if i = 5",
+  answer2: "if i == 5 then",
+  answer3: "if (i == 5)",
+  correctAnswer: "a-3"
 }, {
-  question: "Which national team won the football World cup in 2018 ?",
-  optionA: "England",
-  optionB: "Brazil",
-  optionC: "Germany",
-  optionD: "France",
-  correctOption: "optionD"
+  question: "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
+  answer1: "if i <> 5",
+  answer2: "if (i != 5)",
+  answer3: "if (i <> 5)",
+  correctAnswer: "a-2"
 }, {
-  question: "Which US state was Donald Trump Born ?",
-  optionA: "New York",
-  optionB: "California",
-  optionC: "New Jersey",
-  optionD: "Los Angeles",
-  correctOption: "optionA"
+  question: "How does a FOR loop start?",
+  answer1: "for (i = 0; i <= 5)",
+  answer2: "for (i = 0; i <= 5; i++)",
+  answer3: "for (i <= 5; i++)",
+  correctAnswer: "a-2"
 }, {
-  question: "How man states does Nigeria have ?",
-  optionA: "24",
-  optionB: "30",
-  optionC: "36",
-  optionD: "37",
-  correctOption: "optionC"
+  question: "What is the correct way to write a JavaScript array?",
+  answer1: 'var colors = ["red", "green", "blue"]',
+  answer2: 'var colors = (1:"red", 2:"green", 3:"blue")',
+  answer3: 'var colors = "red", "green", "blue"',
+  correctAnswer: "a-1"
 }, {
-  question: "____ is the capital of Nigeria ?",
-  optionA: "Abuja",
-  optionB: "Lagos",
-  optionC: "Calabar",
-  optionD: "Kano",
-  correctOption: "optionA"
+  question: "How do you round the number 7.25, to the nearest integer?",
+  answer1: "Math.round(7.25)",
+  answer2: "Math.rnd(7.25)",
+  answer3: "round(7.25)",
+  correctAnswer: "a-1"
 }, {
-  question: "Los Angeles is also known as ?",
-  optionA: "Angels City",
-  optionB: "Shining city",
-  optionC: "City of Angels",
-  optionD: "Lost Angels",
-  correctOption: "optionC"
+  question: "How can you detect the client's browser name?",
+  answer1: "client.navName",
+  answer2: "navigator.appName",
+  answer3: "browser.name",
+  correctAnswer: "a-2"
 }, {
-  question: "What is the capital of Germany ?",
-  optionA: "Georgia",
-  optionB: "Missouri",
-  optionC: "Oklahoma",
-  optionD: "Berlin",
-  correctOption: "optionD"
+  question: "What will the following code return: Boolean(10 > 9)",
+  answer1: "true",
+  answer2: "NaN",
+  answer3: "false",
+  correctAnswer: "a-1"
 }, {
-  question: "How many sides does an hexagon have ?",
-  optionA: "Six",
-  optionB: "Sevene",
-  optionC: "Four",
-  optionD: "Five",
-  correctOption: "optionA"
-}, {
-  question: "How many planets are currently in the solar system ?",
-  optionA: "Eleven",
-  optionB: "Seven",
-  optionC: "Nine",
-  optionD: "Eight",
-  correctOption: "optionD"
-}, {
-  question: "Which Planet is the hottest ?",
-  optionA: "Jupitar",
-  optionB: "Mercury",
-  optionC: "Earth",
-  optionD: "Venus",
-  correctOption: "optionB"
-}, {
-  question: "where is the smallest bone in human body located?",
-  optionA: "Toes",
-  optionB: "Ears",
-  optionC: "Fingers",
-  optionD: "Nose",
-  correctOption: "optionB"
-}, {
-  question: "How many hearts does an Octopus have ?",
-  optionA: "One",
-  optionB: "Two",
-  optionC: "Three",
-  optionD: "Four",
-  correctOption: "optionC"
-}, {
-  question: "How many teeth does an adult human have ?",
-  optionA: "28",
-  optionB: "30",
-  optionC: "32",
-  optionD: "36",
-  correctOption: "optionC"
+  question: "Is JavaScript case-sensitive?",
+  answer1: "Yes",
+  answer2: "No",
+  answer3: "It depends...",
+  correctAnswer: "a-1"
 }];
-var shuffledQuestions = []; //empty array to hold shuffled selected questions out of all available questions
 
-function handleQuestions() {
-  //function to shuffle and push 10 questions to shuffledQuestions array
-  //app would be dealing with 10questions per session
-  while (shuffledQuestions.length <= 9) {
-    var random = questions[Math.floor(Math.random() * questions.length)];
-    if (!shuffledQuestions.includes(random)) {
-      shuffledQuestions.push(random);
-    }
+// Username placeholder fade
+username.addEventListener("focus", function () {
+  var usernamePlaceholder = document.getElementById("username-placeholder");
+  if (username.value == "") {
+    usernamePlaceholder.style.cssText = "opacity: 0;";
   }
-}
-var questionNumber = 1; //holds the current question number
-var playerScore = 0; //holds the player score
-var wrongAttempt = 0; //amount of wrong answers picked by player
-var indexNumber = 0; //will be used in displaying next question
-
-// function for displaying next question in the array to dom
-//also handles displaying players and quiz information to dom
-function NextQuestion(index) {
-  handleQuestions();
-  var currentQuestion = shuffledQuestions[index];
-  document.getElementById("question-number").innerHTML = questionNumber;
-  document.getElementById("player-score").innerHTML = playerScore;
-  document.getElementById("display-question").innerHTML = currentQuestion.question;
-  document.getElementById("option-one-label").innerHTML = currentQuestion.optionA;
-  document.getElementById("option-two-label").innerHTML = currentQuestion.optionB;
-  document.getElementById("option-three-label").innerHTML = currentQuestion.optionC;
-  document.getElementById("option-four-label").innerHTML = currentQuestion.optionD;
-}
-function checkForAnswer() {
-  var currentQuestion = shuffledQuestions[indexNumber]; //gets current Question 
-  var currentQuestionAnswer = currentQuestion.correctOption; //gets current Question's answer
-  var options = document.getElementsByName("option"); //gets all elements in dom with name of 'option' (in this the radio inputs)
-  var correctOption = null;
-  options.forEach(function (option) {
-    if (option.value === currentQuestionAnswer) {
-      //get's correct's radio input with correct answer
-      correctOption = option.labels[0].id;
+  username.addEventListener("keypress", function (e) {
+    if (e.keyCode == 13 && username.value != "") {
+      startBtn.click();
+    } else if (e.keyCode == 13 && username.value == "") {
+      startBtn.click();
     }
   });
-
-  //checking to make sure a radio input has been checked or an option being chosen
-  if (options[0].checked === false && options[1].checked === false && options[2].checked === false && options[3].checked == false) {
-    document.getElementById('option-modal').style.display = "flex";
-  }
-
-  //checking if checked radio button is same as answer
-  options.forEach(function (option) {
-    if (option.checked === true && option.value === currentQuestionAnswer) {
-      document.getElementById(correctOption).style.backgroundColor = "green";
-      playerScore++; //adding to player's score
-      indexNumber++; //adding 1 to index so has to display next question..
-      //set to delay question number till when next question loads
-      setTimeout(function () {
-        questionNumber++;
-      }, 1000);
-    } else if (option.checked && option.value !== currentQuestionAnswer) {
-      var wrongLabelId = option.labels[0].id;
-      document.getElementById(wrongLabelId).style.backgroundColor = "red";
-      document.getElementById(correctOption).style.backgroundColor = "green";
-      wrongAttempt++; //adds 1 to wrong attempts 
-      indexNumber++;
-      //set to delay question number till when next question loads
-      setTimeout(function () {
-        questionNumber++;
-      }, 1000);
-    }
+  username.addEventListener("keypress", function () {
+    usernamePlaceholder.style.cssText = "opacity: 0;";
   });
-}
+});
+username.addEventListener("blur", function () {
+  var usernamePlaceholder = document.getElementById("username-placeholder");
+  if (username.value == "") {
+    usernamePlaceholder.style.cssText = "opacity: 1;";
+  }
+});
 
-//called when the next button is called
-function handleNextQuestion() {
-  checkForAnswer(); //check if player picked right or wrong option
-  unCheckRadioButtons();
-  //delays next question displaying for a second just for some effects so questions don't rush in on player
+// Start button action
+startBtn.addEventListener("click", function () {
+  var username = document.getElementById("username");
+  var usernamePlaceholder = document.getElementById("username-placeholder");
+
+  // If the username is empty, don't show quiz
+  if (username.value == "") {
+    username.style.cssText = "animation: enterUsername .5s ease-out; background: #f9e6e6; border-color: #f9dcdc;";
+    usernamePlaceholder.style.cssText = "animation: enterUsername .5s ease-out; color: #e8a1a1;";
+
+    // If it isn't empty, continue to quiz
+  } else {
+    startWrapper.style.cssText = "display: none";
+    quizWrapper.style.cssText = "display: flex; flex-direction: column; justify-content: center;";
+  }
   setTimeout(function () {
-    if (indexNumber <= 9) {
-      //displays next question as long as index number isn't greater than 9, remember index number starts from 0, so index 9 is question 10
-      NextQuestion(indexNumber);
-    } else {
-      handleEndGame(); //ends game if index number greater than 9 meaning we're already at the 10th question
+    username.style.cssText = "animation: none";
+    usernamePlaceholder.style.cssText = "animation: none";
+  }, 500);
+});
+
+// Set a question and its answers
+function setQuestions() {
+  question.innerHTML = questions[currentQuestion].question;
+  answersWrapper.innerHTML = '<div id="answers-js-wrapper"><div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-1" checked><span class="checkmark"></span><label for="answer-1" class="answer" id="a-1">' + questions[currentQuestion].answer1 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-2"><span class="checkmark"></span><label for="answer-2" class="answer" id="a-2">' + questions[currentQuestion].answer2 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-3"><span class="checkmark"></span><label for="answer-3" class="answer" id="a-3">' + questions[currentQuestion].answer3 + '</label></div></div>';
+}
+setQuestions();
+
+// Progress Bar
+function addProgress() {
+  progressBar.style.cssText = "width:" + progress + "%";
+  var progressCSS = document.getElementById("progress-css");
+  var progressJS = document.getElementById("progress-js");
+
+  // Add to the progress bar
+  if (progress < 33) {
+    progress += 4;
+  } else if (progress >= 33 && progress < 60) {
+    progress += 5;
+  } else if (progress >= 60) {
+    progress += 3.2;
+  }
+
+  // Change the background of the sections when the progress bar reaches them
+  if (progress >= 33) {
+    progressCSS.style.cssText = "background: #e7ecfb; border-color: #d3dcf8; animation: progressSection 300ms ease-out;";
+  } else {
+    progressCSS.style.cssText = "background: #f3f5fc; border-color: #e7ecfb";
+  }
+  if (progress >= 60) {
+    progressJS.style.cssText = "background: #e7ecfb; border-color: #d3dcf8; animation: progressSection 300ms ease-out;";
+  } else {
+    progressJS.style.cssText = "background: #f3f5fc; border-color: #e7ecfb";
+  }
+}
+addProgress();
+
+// See if the checked answer is correct
+function checkAnswer() {
+  var answerWrapper = document.querySelectorAll(".answer-wrapper");
+  checkedAnswer = questions[currentQuestion].answer1;
+  for (var i = 0; i < answerWrapper.length; i++) {
+    answerWrapper[i].addEventListener("click", function (e) {
+      try {
+        thisAnswer = e.target;
+        checkedAnswer = thisAnswer.closest("label").innerHTML;
+      } catch (Exception) {}
+    });
+  }
+}
+checkAnswer();
+
+// Next button click
+nextBtn.addEventListener("click", function () {
+  // Get the correct answer for the current question and check the first answer as the default one
+  var correctAnswer = document.getElementById(questions[currentQuestion].correctAnswer).innerHTML;
+  // If the current question isn't the last one, show the next one with its answers
+  var lastQuestion = questions.length;
+  if (currentQuestion + 1 != lastQuestion) {
+    currentQuestion++;
+    question.innerHTML = questions[currentQuestion].question;
+    document.getElementById("a-1").innerHTML = questions[currentQuestion].answer1;
+    document.getElementById("a-2").innerHTML = questions[currentQuestion].answer2;
+    document.getElementById("a-3").innerHTML = questions[currentQuestion].answer3;
+
+    // Check if the question is correct, if it is, add .5 to the global score
+    if (checkedAnswer == correctAnswer) {
+      score += .5;
+    }
+    setQuestions();
+
+    // If the current question is the last question, check if it is correct
+  } else {
+    if (checkedAnswer == correctAnswer) {
+      score += .5;
     }
 
-    resetOptionBackground();
-  }, 1000);
+    // Hide the quiz and show the leaderboard
+    leaderboard();
+  }
+  checkAnswer();
+  addProgress();
+});
+function leaderboard() {
+  quizWrapper.style.display = "none";
+  leaderboardWrapper.style.display = "block";
+  var table = document.getElementById("table");
+  table.innerHTML = table.innerHTML + "<tr><td class='table-username'>" + username.value + "</td> <td class='table-score'>" + score + "</td></tr>";
 }
 
-//sets options background back to null after display the right/wrong colors
-function resetOptionBackground() {
-  var options = document.getElementsByName("option");
-  options.forEach(function (option) {
-    document.getElementById(option.labels[0].id).style.backgroundColor = "";
-  });
-}
-
-// unchecking all radio buttons for next question(can be done with map or foreach loop also)
-function unCheckRadioButtons() {
-  var options = document.getElementsByName("option");
-  for (var i = 0; i < options.length; i++) {
-    options[i].checked = false;
+// Sort the leaderboard by score
+sorted = false;
+function sortScore() {
+  if (!sorted) {
+    sorted = true;
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("table");
+    switching = true;
+    while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < rows.length - 1; i++) {
+        shouldSwitch = false;
+        x = rows[i].getElementsByTagName("TD")[1];
+        y = rows[i + 1].getElementsByTagName("TD")[1];
+        if (Number(x.innerHTML) < Number(y.innerHTML)) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+      if (shouldSwitch) {
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  } else if (sorted) {
+    sorted = false;
+    var _table, _rows, _switching, _i, _x, _y, _shouldSwitch;
+    _table = document.getElementById("table");
+    _switching = true;
+    while (_switching) {
+      _switching = false;
+      _rows = _table.rows;
+      for (_i = 1; _i < _rows.length - 1; _i++) {
+        _shouldSwitch = false;
+        _x = _rows[_i].getElementsByTagName("TD")[1];
+        _y = _rows[_i + 1].getElementsByTagName("TD")[1];
+        if (Number(_x.innerHTML) > Number(_y.innerHTML)) {
+          _shouldSwitch = true;
+          break;
+        }
+      }
+      if (_shouldSwitch) {
+        _rows[_i].parentNode.insertBefore(_rows[_i + 1], _rows[_i]);
+        _switching = true;
+      }
+    }
   }
 }
 
-// function for when all questions being answered
-function handleEndGame() {
-  var remark = null;
-  var remarkColor = null;
-
-  // condition check for player remark and remark color
-  if (playerScore <= 3) {
-    remark = "Bad Grades, Keep Practicing.";
-    remarkColor = "red";
-  } else if (playerScore >= 4 && playerScore < 7) {
-    remark = "Average Grades, You can do better.";
-    remarkColor = "orange";
-  } else if (playerScore >= 7) {
-    remark = "Excellent, Keep the good work going.";
-    remarkColor = "green";
-  }
-  var playerGrade = playerScore / 10 * 100;
-
-  //data to display to score board
-  document.getElementById('remarks').innerHTML = remark;
-  document.getElementById('remarks').style.color = remarkColor;
-  document.getElementById('grade-percentage').innerHTML = playerGrade;
-  document.getElementById('wrong-answers').innerHTML = wrongAttempt;
-  document.getElementById('right-answers').innerHTML = playerScore;
-  document.getElementById('score-modal').style.display = "flex";
-}
-
-//closes score modal, resets game and reshuffles questions
-function closeScoreModal() {
-  questionNumber = 1;
-  playerScore = 0;
-  wrongAttempt = 0;
-  indexNumber = 0;
-  shuffledQuestions = [];
-  NextQuestion(indexNumber);
-  document.getElementById('score-modal').style.display = "none";
-}
-
-//function to close warning modal
-function closeOptionModal() {
-  document.getElementById('option-modal').style.display = "none";
-}
+// Reset everything when the retry button is clicked
+retryBtn.addEventListener("click", function () {
+  currentQuestion = 0;
+  score = 0;
+  progress = 0;
+  leaderboardWrapper.style.display = "none";
+  startWrapper.style.display = "block";
+  username.value = "";
+  setQuestions();
+  checkAnswer();
+  addProgress();
+});
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -467,7 +481,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45225" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36895" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
