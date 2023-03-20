@@ -3,22 +3,102 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/4e7bb40584b55a44f4657b188986bff4.css">
-    <script defer="" src="/9a9569e9d73f33740eada95275da7f30.js"></script>
+    <link rel="stylesheet" href="/Brief_Quizz_Js.9ad09f98.css">
+    <script defer="" src="/questionnaire.840b0b75.js"></script>
     <script src="https://kit.fontawesome.com/9f8cd85ffa.js" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizz JavaScript</title>
-</head>
+<script src="/Brief_Quizz_Js.9ad09f98.js"></script></head>
 
 <body>
-    <div class="container">
-        <div id="home" class="flex-column flex-center">
-            <h1>Quizz JavaScript </h1>
-            <a href="#" class="btn">Jouer!</a>
-            <a href="#" class="btn" id="ladder-btn">Leaderboard <i class="fas fa-crown"></i></a>
-        </div>
-    </div>
+
+    <body onload="NextQuestion(0)">
+        <main>
+            <!-- creating a modal for when quiz ends -->
+            <div class="modal-container" id="score-modal">
+
+                <div class="modal-content-container">
+
+                    <h1>Congratulations, Quiz Completed.</h1>
+
+                    <div class="grade-details">
+                        <p>Attempts : 10</p>
+                        <p>Wrong Answers : <span id="wrong-answers"></span></p>
+                        <p>Right Answers : <span id="right-answers"></span></p>
+                        <p>Grade : <span id="grade-percentage"></span>%</p>
+                        <p><span id="remarks"></span></p>
+                    </div>
+
+                    <div class="modal-button-container">
+                        <button onclick="closeScoreModal()">Continue</button>
+                    </div>
+
+                </div>
+            </div>
+            <!-- end of modal of quiz details-->
+
+            <div class="game-quiz-container">
+
+                <div class="game-details-container">
+                    <h1>Score : <span id="player-score"></span> / 10</h1>
+                    <h1> Question : <span id="question-number"></span> / 10</h1>
+                </div>
+
+                <div class="game-question-container">
+                    <h1 id="display-question"></h1>
+                </div>
+
+                <div class="game-options-container">
+
+                    <div class="modal-container" id="option-modal">
+
+                        <div class="modal-content-container">
+                            <h1>Please Pick An Option</h1>
+
+                            <div class="modal-button-container">
+                                <button onclick="closeOptionModal()">Continue</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <span>
+                        <input type="radio" id="option-one" name="option" class="radio" value="optionA">
+                        <label for="option-one" class="option" id="option-one-label"></label>
+                    </span>
+
+
+                    <span>
+                        <input type="radio" id="option-two" name="option" class="radio" value="optionB">
+                        <label for="option-two" class="option" id="option-two-label"></label>
+                    </span>
+
+
+                    <span>
+                        <input type="radio" id="option-three" name="option" class="radio" value="optionC">
+                        <label for="option-three" class="option" id="option-three-label"></label>
+                    </span>
+
+
+                    <span>
+                        <input type="radio" id="option-four" name="option" class="radio" value="optionD">
+                        <label for="option-four" class="option" id="option-four-label"></label>
+                    </span>
+
+
+                </div>
+
+                <div class="next-button-container">
+                    <button onclick="handleNextQuestion()">Next Question</button>
+                </div>
+
+            </div>
+        </main>
+        <script src="/Brief_Quizz_Js.e31bb0bc.js"></script>
+    </body>
+
 </body>
 
 </html>
