@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/Brief_Quizz_Js.9ad09f98.css">
-    <script defer="" src="/Brief_Quizz_Js.e31bb0bc.js"></script>
+    <script defer="" src="/Brief_Quizz_Js.77de5100.js"></script>
     <script src="https://kit.fontawesome.com/9f8cd85ffa.js" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizz JavaScript</title>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/56942480bb.js" crossorigin="anonymous"></script>
 <script src="/Brief_Quizz_Js.9ad09f98.js"></script></head>
 
@@ -22,19 +24,19 @@
     <div id="main-wrapper">
 
         <div id="start-wrapper">
-            <h1 id="start-title">Quizz <span>&amp;</span> JS</h1>
+            <h1 id="start-title" class="auto-typin">Quizz Front End <span>&amp;</span> JS</h1>
 
             <div id="start-username-wrapper">
                 <input type="text" id="username" autocomplete="off">
-                <p id="username-placeholder">Username</p>
+                <p id="username-placeholder">Ton Nom</p>
             </div>
 
             <div id="start-btn-wrapper">
-                <button id="start-btn" class="btn">Start</button>
+                <button id="start-btn" class="btn">Démarrer</button>
             </div>
         </div>
 
-        <div id="quiz-wrapper">
+        <div id="quiz-wrapper" class="hidden_quizz">
             <div id="progress-wrapper">
                 <div id="progress-icons-wrapper">
                     <div id="progress-html">
@@ -68,7 +70,7 @@
         </div>
 
         <div id="leaderboard-wrapper">
-            <h2 id="leaderboard-title">Leaderboard <i class="fas fa-flag-checkered"></i></h2>
+            <h2 id="leaderboard-title">Leaderboard<i class="fas fa-flag-checkered"></i></h2>
 
             <table id="table">
                 <tr id="table-titles">
@@ -78,7 +80,7 @@
             </table>
 
             <div id="retry-btn-wrapper">
-                <button id="retry-btn" class="btn">Retry</button>
+                <button id="retry-btn" class="btn">Recommencer</button>
             </div>
         </div>
     </div>

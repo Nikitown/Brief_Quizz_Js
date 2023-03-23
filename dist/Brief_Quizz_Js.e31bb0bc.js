@@ -137,27 +137,27 @@ var currentQuestion = 0;
 var score = 0;
 var progress = 0;
 
-// Questions and answers
+// Q&A
 var questions = [{
-  question: "Choose the correct HTML element for the largest heading:",
+  question: "Quel est le plus gros titre d'une page HTML?",
   answer1: "&lt;h1&gt;",
   answer2: "&lt;h6&gt;",
   answer3: "&lt;heading&gt;",
   correctAnswer: "a-1"
 }, {
-  question: "What is the correct HTML element for inserting a line break?",
+  question: "Quel élément HTML utilise t'on pour faire un line break?",
   answer1: "&lt;break&gt;",
   answer2: "&lt;br&gt;",
   answer3: "&lt;lb&gt;",
   correctAnswer: "a-2"
 }, {
-  question: "Choose the correct HTML element to define important text:",
+  question: "Choissisez l'élement HTML qui souligne l'importance d'un texte:",
   answer1: "&lt;b&gt;",
   answer2: "&lt;strong&gt;",
   answer3: "&lt;important&gt;",
   correctAnswer: "a-2"
 }, {
-  question: "How can you open a link in a new tab/browser window?",
+  question: "Comment ouvre t-on un lien vers un nouvel onglet/fenêtre ?",
   answer1: "&lt;a href='url' target='new'&gt;",
   answer2: "&lt;a href='url' new&gt;",
   answer3: "&lt;a href='url' target='_blank'&gt;",
@@ -311,6 +311,10 @@ function setQuestions() {
   answersWrapper.innerHTML = '<div id="answers-js-wrapper"><div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-1" checked><span class="checkmark"></span><label for="answer-1" class="answer" id="a-1">' + questions[currentQuestion].answer1 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-2"><span class="checkmark"></span><label for="answer-2" class="answer" id="a-2">' + questions[currentQuestion].answer2 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-3"><span class="checkmark"></span><label for="answer-3" class="answer" id="a-3">' + questions[currentQuestion].answer3 + '</label></div></div>';
 }
 setQuestions();
+
+// // Hide the question section & show "Right Answer" & "Wrong Answer" with a next button
+
+// var quizzWrapper = document.getElementById("quizz-wrapper")
 
 // Progress Bar
 function addProgress() {
@@ -481,7 +485,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36895" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35133" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
