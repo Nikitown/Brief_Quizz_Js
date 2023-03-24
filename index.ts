@@ -267,7 +267,7 @@ addProgress()
 // See if the checked answer is correct
 function checkAnswer() {
     const answerWrapper = document.querySelectorAll(".answer-wrapper")
-
+    checkedAnswer = questions[currentQuestion].answer1
 
     for (let i = 0; i < answerWrapper.length; i++) {
         answerWrapper[i].addEventListener("click", function (e) {
@@ -323,7 +323,7 @@ function leaderboard() {
     leaderboardWrapper!.style.display = "block"
 
     const table = document.getElementById("table")
-    table!.innerHTML = table?.innerHTML + "<tr><td class='table-username'>" + username!.value + "</td> <td class='table-score'>" + score + "</td></tr>"
+    table.innerHTML = table?.innerHTML + "<tr><td class='table-username'>" + username!.value + "</td> <td class='table-score'>" + score + "</td></tr>"
 }
 
 // Sort the leaderboard by score

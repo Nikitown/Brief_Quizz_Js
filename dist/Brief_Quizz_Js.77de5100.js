@@ -332,6 +332,7 @@ addProgress();
 // See if the checked answer is correct
 function checkAnswer() {
   var answerWrapper = document.querySelectorAll(".answer-wrapper");
+  checkedAnswer = questions[currentQuestion].answer1;
   for (var i = 0; i < answerWrapper.length; i++) {
     answerWrapper[i].addEventListener("click", function (e) {
       try {
@@ -477,7 +478,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33011" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43471" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
