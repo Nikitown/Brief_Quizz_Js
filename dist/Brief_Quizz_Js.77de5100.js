@@ -134,39 +134,39 @@ var retryBtn = document.getElementById("retry-btn");
 var currentQuestion = 0;
 var score = 0;
 var progress = 0;
-// Q&A
+// Questions and answers
 var questions = [{
-  question: "Quel est le plus gros titre d'une page HTML?",
+  question: "Choose the correct HTML element for the largest heading:",
   answer1: "&lt;h1&gt;",
   answer2: "&lt;h6&gt;",
   answer3: "&lt;heading&gt;",
   correctAnswer: "a-1"
 }, {
-  question: "Quel élément HTML utilise t'on pour faire un line break?",
+  question: "What is the correct HTML element for inserting a line break?",
   answer1: "&lt;break&gt;",
   answer2: "&lt;br&gt;",
   answer3: "&lt;lb&gt;",
   correctAnswer: "a-2"
 }, {
-  question: "Choissisez l'élement HTML qui souligne l'importance d'un texte:",
+  question: "Choose the correct HTML element to define important text:",
   answer1: "&lt;b&gt;",
   answer2: "&lt;strong&gt;",
   answer3: "&lt;important&gt;",
   correctAnswer: "a-2"
 }, {
-  question: "Comment ouvre t-on un lien vers un nouvel onglet/fenêtre ?",
+  question: "How can you open a link in a new tab/browser window?",
   answer1: "&lt;a href='url' target='new'&gt;",
   answer2: "&lt;a href='url' new&gt;",
   answer3: "&lt;a href='url' target='_blank'&gt;",
   correctAnswer: "a-3"
 }, {
-  question: "Parmi ces propositions, quels élements font tous parti de la famille <table>",
+  question: "Which of these elements are all &lt;table&gt; elements?",
   answer1: "&lt;table&gt; &lt;tr&gt; &lt;td&gt;",
   answer2: "&lt;thead&gt; &lt;body&gt; &lt;tr&gt;",
   answer3: "&lt;table&gt; &lt;tr&gt; &lt;tt&gt;",
   correctAnswer: "a-1"
 }, {
-  question: "Les éléments en ligne sont normalement affichés sans commencer une nouvelle ligne.",
+  question: "Inline elements are normally displayed without starting a new line.",
   answer1: "False",
   answer2: "True",
   answer3: "It depends...",
@@ -178,19 +178,19 @@ var questions = [{
   answer3: "all.h1 {background-color: #FFFFFF;}",
   correctAnswer: "a-1"
 }, {
-  question: "Quelle propriété CSS contrôle la taille de la police?",
+  question: "Which CSS property controls the text size?",
   answer1: "font-size",
   answer2: "text-size",
   answer3: "text-style",
   correctAnswer: "a-1"
 }, {
-  question: "Comment affiche t-on un hyperlien sans l'underline?",
+  question: "How do you display hyperlinks without an underline?",
   answer1: "a {text-decoration: no-underline;}",
   answer2: "a {underline: none;}",
   answer3: "a {text-decoration: none;}",
   correctAnswer: "a-3"
 }, {
-  question: "Comment mettre en majuscule la première lettre de chaque phrase?",
+  question: "How do you make each word in a text start with a capital letter?",
   answer1: "text-style: capitalize",
   answer2: "text-transform: capitalize",
   answer3: "You can't do that with CSS",
@@ -270,9 +270,7 @@ username === null || username === void 0 ? void 0 : username.addEventListener("f
     }
   });
   username === null || username === void 0 ? void 0 : username.addEventListener("keypress", function () {
-    if (usernamePlaceholder) {
-      usernamePlaceholder.style.cssText = "opacity: 0;";
-    }
+    usernamePlaceholder.style.cssText = "opacity: 0;";
   });
 });
 username === null || username === void 0 ? void 0 : username.addEventListener("blur", function () {
@@ -288,15 +286,11 @@ startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("c
   // If the username is empty, don't show quiz
   if ((username === null || username === void 0 ? void 0 : username.value) == "") {
     username.style.cssText = "animation: enterUsername .5s ease-out; background: #f9e6e6; border-color: #f9dcdc;";
-    if (usernamePlaceholder) {
-      usernamePlaceholder.style.cssText = "animation: enterUsername .5s ease-out; color: #e8a1a1;";
-    }
+    usernamePlaceholder.style.cssText = "animation: enterUsername .5s ease-out; color: #e8a1a1;";
     // If it isn't empty, continue to quiz
   } else {
-    if (startWrapper) {
-      startWrapper.style.cssText = "display: none";
-      if (quizWrapper) quizWrapper.style.cssText = "display: flex; flex-direction: column; justify-content: center;";
-    }
+    if (startWrapper) startWrapper.style.cssText = "display: none";
+    quizWrapper.style.cssText = "display: flex; flex-direction: column; justify-content: center;";
   }
   setTimeout(function () {
     if (username) username.style.cssText = "animation: none";
@@ -305,15 +299,13 @@ startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("c
 });
 // Set a question and its answers
 function setQuestions() {
-  if (question) question.innerHTML = questions[currentQuestion].question;
-  if (answersWrapper) answersWrapper.innerHTML = '<div id="answers-js-wrapper"><div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-1" checked><span class="checkmark"></span><label for="answer-1" class="answer" id="a-1">' + questions[currentQuestion].answer1 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-2"><span class="checkmark"></span><label for="answer-2" class="answer" id="a-2">' + questions[currentQuestion].answer2 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-3"><span class="checkmark"></span><label for="answer-3" class="answer" id="a-3">' + questions[currentQuestion].answer3 + '</label></div></div>';
+  question.innerHTML = questions[currentQuestion].question;
+  answersWrapper.innerHTML = '<div id="answers-js-wrapper"><div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-1" checked><span class="checkmark"></span><label for="answer-1" class="answer" id="a-1">' + questions[currentQuestion].answer1 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-2"><span class="checkmark"></span><label for="answer-2" class="answer" id="a-2">' + questions[currentQuestion].answer2 + '</label></div>' + '<div class="answer-wrapper"><input type="radio" name="answers" class="answer-input" id="answer-3"><span class="checkmark"></span><label for="answer-3" class="answer" id="a-3">' + questions[currentQuestion].answer3 + '</label></div></div>';
 }
 setQuestions();
-// // // Hide the question section & show "Right Answer" & "Wrong Answer" with a next button
-// var quizzWrapper = document.getElementById("quizz-wrapper")
 // Progress Bar
 function addProgress() {
-  if (progressBar) progressBar.style.cssText = "width:" + progress + "%";
+  progressBar.style.cssText = "width:" + progress + "%";
   var progressCSS = document.getElementById("progress-css");
   var progressJS = document.getElementById("progress-js");
   // Add to the progress bar
@@ -324,14 +316,14 @@ function addProgress() {
   } else if (progress >= 60) {
     progress += 3.2;
   }
-  // Change the background of the sections when the progress bar reaches them.
+  // Change the background of the sections when the progress bar reaches them
   if (progress >= 33) {
-    progressCSS.style.cssText = "background: #e7ecfb; border-color: #d3dcf8; animation: progressSection 250ms ease-out;";
+    progressCSS.style.cssText = "background: #e7ecfb; border-color: #d3dcf8; animation: progressSection 300ms ease-out;";
   } else {
     progressCSS.style.cssText = "background: #f3f5fc; border-color: #e7ecfb";
   }
   if (progress >= 60) {
-    progressJS.style.cssText = "background: #e7ecfb; border-color: #d3dcf8; animation: progressSection 250ms ease-out;";
+    progressJS.style.cssText = "background: #e7ecfb; border-color: #d3dcf8; animation: progressSection 300ms ease-out;";
   } else {
     progressJS.style.cssText = "background: #f3f5fc; border-color: #e7ecfb";
   }
@@ -339,8 +331,7 @@ function addProgress() {
 addProgress();
 // See if the checked answer is correct
 function checkAnswer() {
-  var answerWrapper = document.querySelectorAll(".answers-wrapper");
-  checkedAnswer = questions[currentQuestion].answer1;
+  var answerWrapper = document.querySelectorAll(".answer-wrapper");
   for (var i = 0; i < answerWrapper.length; i++) {
     answerWrapper[i].addEventListener("click", function (e) {
       try {
@@ -383,10 +374,10 @@ function leaderboard() {
   quizWrapper.style.display = "none";
   leaderboardWrapper.style.display = "block";
   var table = document.getElementById("table");
-  table.innerHTML = table.innerHTML + "<tr><td class='table-username'>" + username.value + "</td> <td class='table-score'>" + score + "</td></tr>";
+  table.innerHTML = (table === null || table === void 0 ? void 0 : table.innerHTML) + "<tr><td class='table-username'>" + username.value + "</td> <td class='table-score'>" + score + "</td></tr>";
 }
 // Sort the leaderboard by score
-sorted = false;
+var sorted = false;
 function sortScore() {
   if (!sorted) {
     sorted = true;
@@ -398,7 +389,7 @@ function sortScore() {
       y = void 0,
       shouldSwitch = void 0;
     table = document.getElementById("table");
-    switching = true;
+    var switching = true;
     while (switching) {
       switching = false;
       rows = table.rows;
@@ -417,7 +408,7 @@ function sortScore() {
       }
     }
   } else if (sorted) {
-    sorted = false;
+    var sorted_1 = false;
     var table = void 0,
       rows = void 0,
       switching = void 0,
@@ -426,7 +417,7 @@ function sortScore() {
       y = void 0,
       shouldSwitch = void 0;
     table = document.getElementById("table");
-    switching = true;
+    var switching = true;
     while (switching) {
       switching = false;
       rows = table.rows;
@@ -458,6 +449,9 @@ retryBtn === null || retryBtn === void 0 ? void 0 : retryBtn.addEventListener("c
   checkAnswer();
   addProgress();
 });
+function getElementById(arg0) {
+  throw new Error("Function not implemented.");
+}
 },{}],"../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -483,7 +477,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35813" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33011" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
